@@ -40,7 +40,7 @@ class CCombinacion
 
          echo "</tbody>
                     </table>
-                    <br> TOTAL : $this->kcalTotal";
+                    TOTAL : $this->kcalTotal<br><br>";
 
     }
 
