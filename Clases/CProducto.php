@@ -15,6 +15,7 @@ class CProducto
     private $obligatorio;
     public $cantidad;
     public $kcalTotal;
+    public $referenciaFact;
 
     /**
      * @return mixed
@@ -144,6 +145,88 @@ class CProducto
     {
         $this->obligatorio = $obligatorio;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+
+    /**
+     * @param mixed $tipo
+     */
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHorario()
+    {
+        return $this->horario;
+    }
+
+    /**
+     * @param mixed $horario
+     */
+    public function setHorario($horario)
+    {
+        $this->horario = $horario;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCantidad()
+    {
+        return $this->cantidad;
+    }
+
+    /**
+     * @param mixed $cantidad
+     */
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getKcalTotal()
+    {
+        return $this->kcalTotal;
+    }
+
+    /**
+     * @param mixed $kcalTotal
+     */
+    public function setKcalTotal($kcalTotal)
+    {
+        $this->kcalTotal = $kcalTotal;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReferenciaFact()
+    {
+        return $this->referenciaFact;
+    }
+
+    /**
+     * @param mixed $referenciaFact
+     */
+    public function setReferenciaFact($referenciaFact)
+    {
+        $this->referenciaFact = $referenciaFact;
+    }
+
+
 
 
 }

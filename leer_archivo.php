@@ -31,6 +31,7 @@ $cHoja = new CHoja();
 $dataHorarios = $cHoja->procesarHoja($hojaHorarios);
 $dataTipos =  $cHoja->procesarHoja($hojaTipos);
 $dataProductos =  $cHoja->procesarHoja($hojaProductos);
+
 $reader->close();
 /*
  * Procesar de horarios
@@ -98,14 +99,12 @@ $productos = [];
 for ($k = 0; $k< count( array_values( $dataProductos)[0]);$k++){
     $cProducto = new CProducto();
     $cProducto->setId( array_values( $dataProductos["ID"])[$k]);
-    $cProducto->setNombre(mb_strtoupper( array_values( $dataProductos["NOMBRE"])[$k]));
+    $cProducto->setNombre(mb_strtoupper( array_values($dataProductos["NOMBRE"])[$k]));
     $cProducto->setKcal(array_values( $dataProductos["KCAL"])[$k]);
     $cProducto->setMedida(array_values( $dataProductos["MEDIDA"])[$k]);
     $tipo = array_values( $dataProductos["TIPO"])[$k];
     $cProducto ->setIdtipo( $idtipo($tipo)  );
-    if($cProducto->getIdtipo()!=null){
-        $productos [] = $cProducto;
-    }
+    $productos [] = $cProducto;
 }
 
 $horarioProductoRestricciones = [];
@@ -154,6 +153,8 @@ foreach ($productos as $producto){
 foreach ($horarioProductoRestricciones as $horarioproductoRestriccionx){
     (new DHorarioProductoRestriccion())->registrar($horarioproductoRestriccionx);
 }
+
+(new DFactRecomendacion())->cargarHechos();
 DConexion::habilitarKeys();
 
 echo "Archivos cargados correctamente";

@@ -26,7 +26,6 @@ $arrCombinaciones = new CCombinacionSemana();
 
 //echo json_encode($horarios);
 date_default_timezone_set('America/Lima');
-
 $hoy = time();
 $diasSemana =[ "Domingo","Lunes", "Martes","Miércoles","Jueves","Viernes","Sábado"];
 function formatDia($hoy){
@@ -58,7 +57,6 @@ for($i=0;$i<$generador->getMaxSemana();$i++){
             $generador->filtrarXHorario($horario->getId());
             $tipos = $generador->tipos;
             $listaProductos = $generador->listaProductos;
-
             $nroCombinacionGeneradas = 0;
 
             while($nroCombinacionGeneradas< $maxCombinacionGeneradas){
@@ -79,6 +77,7 @@ for($i=0;$i<$generador->getMaxSemana();$i++){
 
                 }
             }
+
     }
     $contDias++;
 

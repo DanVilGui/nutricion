@@ -1,5 +1,4 @@
 <?php
-include_once 'Datos/imports.php';
 
 class CCombinacion
 {

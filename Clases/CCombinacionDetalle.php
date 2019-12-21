@@ -29,7 +29,6 @@ class CCombinacionDetalle
         $this->horario = $producto->horario;
         $this->medida = $producto->medida;
         $this->kcal = $producto->kcal;
-
     }
 
     /**

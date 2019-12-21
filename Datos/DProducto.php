@@ -25,30 +25,31 @@ class DProducto
         $resultado = $st->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
     }
+
     public function buscarHorarioTipoProductos($idhorario){
         $conexion = DConexion::Instance();
-        $sql = "SELECT DISTINCT  idtipo, tipo, maximo, obligatorio from productos_buscar where idhorario = ? order by obligatorio desc ";
+        $sql = "SELECT  distinct t.id AS idtipo, t.alias AS tipo, fr.maximo,fr.obligatorio FROM fact_recomendacion fr
+                INNER JOIN dim_producto p  ON fr.idproducto = p.id
+                INNER JOIN dim_horario h ON  fr.idhorario = h.id
+                INNER JOIN dim_tipo t ON p.idtipo = t.id
+                WHERE idhorario = ?
+                order by h.id ,fr.obligatorio DESC, t.id";
         $st =$conexion->prepare($sql);
         $st->execute([$idhorario]);
         $resultado = $st->fetchAll(PDO::FETCH_ASSOC);
         return $resultado;
     }
 
-    public function buscarProductoHorarioTipo($idhorario, $idtipo,$maxKCal){
-        $conexion = DConexion::Instance();
-        $sql = "SELECT * from productos_buscar p
-                where idhorario = ? AND idtipo = ?
-                and kcal < ?
-                ORDER BY RAND() LIMIT 1;";
-        $st =$conexion->prepare($sql);
-        $st->execute([$idhorario, $idtipo, $maxKCal]);
-        $resultado = $st->fetch(PDO::FETCH_ASSOC);
-        return $resultado;
-    }
+
     public function buscarProductosHorarios($idhorario){
         $conexion = DConexion::Instance();
-        $sql = "SELECT * from productos_buscar p
-                where idhorario = ?;";
+        $sql = "SELECT fr.id,fr.idproducto, p.nombre ,p.medida, kcal,h.id AS idhorario, h.alias AS horario, h.porcentaje,
+                 t.id AS idtipo, t.alias AS tipo,fr.obligatorio, fr.maximo FROM fact_recomendacion fr
+                INNER JOIN dim_producto p  ON fr.idproducto = p.id
+                INNER JOIN dim_horario h ON  fr.idhorario = h.id
+                INNER JOIN dim_tipo t ON p.idtipo = t.id
+                where fr.idhorario = ?
+                order by h.id ,fr.obligatorio DESC, t.id";
         $st =$conexion->prepare($sql);
         $st->execute([$idhorario]);
         $resultado = $st->fetchAll(PDO::FETCH_ASSOC);

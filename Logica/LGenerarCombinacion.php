@@ -90,7 +90,8 @@ class LGenerarCombinacion
         $listaProductos = array();
         foreach ($dtProductos as $pro){
             $producto = new CProducto();
-            $producto->setId($pro["id"]);
+            $producto->setReferenciaFact($pro["id"]);
+            $producto->setId($pro["idproducto"]);
             $producto->setNombre($pro["nombre"]);
             $producto->setKcal($pro["kcal"]);
             $producto->setIdtipo($pro["idtipo"]);
@@ -120,6 +121,7 @@ class LGenerarCombinacion
 
     public function filtrarProductoTipo($idtipo){
         $arr = array();
+
         foreach ($this->listaProductos as $producto){
             if($producto->idtipo == $idtipo){
                 $arr[] = $producto;

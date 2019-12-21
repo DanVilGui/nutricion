@@ -17,7 +17,7 @@ class DConexion
             self::$PDO  = new PDO("mysql:host=" . self::$server . ";port=" . self::$port . ";dbname=" . self::$bd . ";charset=UTF8;",
                 self::$user,self::$pass, array(PDO::ATTR_PERSISTENT=>true));
             self::$PDO->query("SET NAMES utf8;");
-
+            self::$PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         return self::$PDO;
     }
