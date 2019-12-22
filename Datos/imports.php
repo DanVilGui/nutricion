@@ -8,3 +8,4 @@ include_once 'DHorarioProductoRestriccion.php';
 include_once 'DFactRecomendacion.php';
 include_once 'DPersona.php';
 include_once 'DPersonaMedida.php';
+include_once 'DPersonaRutina.php';

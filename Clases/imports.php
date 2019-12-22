@@ -11,3 +11,4 @@ include_once 'CCombinacionSemana.php';
 include_once 'CPersona.php';
 include_once 'CRespuestaWs.php';
 include_once 'CPersonaMedida.php';
+include_once 'CPersonaRutina.php';

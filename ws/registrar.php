@@ -25,10 +25,9 @@ if(isset($respuesta["success"])) {
     //ok
     $idpersona = $respuesta["idpersona"];
     if($idlogin_tipo!=1){
-        $persona =  $dPersona->buscarPersonaID($idpersona);
-        $medidas = $dPersona->buscarMedidasControles($idpersona);
-        echo json_encode( CRespuestaWs::mostrar(true, "Registrado correctamente",
-            ["datos"=> $persona,"medidas"=> $medidas]));
+        $lPersona  = new LPersona();
+        $res =  $lPersona->buscarPersonaDatos($idpersona);
+        echo json_encode( CRespuestaWs::mostrar(true, "Registrado correctamente", $res));
 
     }else{
         echo json_encode(CRespuestaWs::mostrar(true, "Registrado correctamente"));
@@ -46,10 +45,9 @@ if(isset($respuesta["success"])) {
         echo json_encode(CRespuestaWs::mostrar(false, $message));
     }else{
         $idpersona = $respuesta["idpersona"];
-        $persona =  $dPersona->buscarPersonaID($idpersona);
-        $medidas = $dPersona->buscarMedidasControles($idpersona);
-        echo json_encode( CRespuestaWs::mostrar(true, "Registrado correctamente",
-            ["datos"=> $persona,"medidas"=> $medidas]));
+        $lPersona  = new LPersona();
+        $res =  $lPersona->buscarPersonaDatos($idpersona);
+        echo json_encode( CRespuestaWs::mostrar(true, "Registrado correctamente", $res));
     }
 }
 
