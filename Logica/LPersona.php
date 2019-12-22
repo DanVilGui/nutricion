@@ -12,8 +12,9 @@ class LPersona
 
     function buscarPersonaDatos($idpersona){
         $dPersona = new DPersona();
+        $dPersonaMedida = new DPersonaMedida();
         $persona =  $dPersona->buscarPersonaID($idpersona);
-        $medidas = $dPersona->buscarMedidasControles($idpersona);
+        $medidas = $dPersonaMedida->buscarUltimaMedida($idpersona);
         $dPersonaRutina = new DPersonaRutina();
         $dPersonaPreferencia = new DPersonaPreferencia();
         $rutina = $dPersonaRutina->buscarRutina($idpersona);
@@ -36,6 +37,16 @@ class LPersona
     function registrarPreferencia($clsPersonaPreferencua){
         $dPersonaPreferencia = new DPersonaPreferencia();
         return $dPersonaPreferencia->registrarPreferencia($clsPersonaPreferencua);
+    }
+
+    function buscarPersona($idpersona){
+        $dPersona = new DPersona();
+        return $dPersona->buscarPersonaID($idpersona);
+    }
+
+    function buscarUltimaMedida($idpersona){
+        $dPersonaMedida = new DPersonaMedida();
+        return $dPersonaMedida->buscarUltimaMedida($idpersona);
     }
 
 }
