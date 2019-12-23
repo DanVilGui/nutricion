@@ -1,9 +1,10 @@
 <?php
 include_once 'validaciones.php';
-//$data = WS::validarToken();
-//$idpersona = $data["idpersona"];
 
-$idpersona = 1;
+$data = WS::validarToken();
+$idpersona = $data["idpersona"];
+
+//$idpersona = 1;
 $lPersona = new LPersona();
 /** @var CPersona $persona */
 /** @var CPersonaMedida $medida */
@@ -21,7 +22,6 @@ $rutina = ( object)$lPersona->buscarRutina($idpersona);
 $edad = $interval->y;
 $sexo = $persona->sexo;
 $peso = $medida->peso;
-
 $ger = $gaf = 0;
 
 //echo $edad . "-" . $sexo . "-" . $peso . "\n";
@@ -67,12 +67,17 @@ $gaf += ($sexo == "M") ? 0.021 * $peso * 60 * $rutina->correr : 0.019 * $peso * 
 
 $get = $gaf + $ger;
 
+$persona->kcal = $get;
+$lPersona->cambiarKcal($persona);
+
+/*
+ * GENERAR LAS DIETAS
+ */
 $generador = new LGenerarCombinacion();
 $horarios=  $generador->listarHorarios();
 $maxCombinacionGeneradas = LGenerarCombinacion::MAX_COMBINACIONES;
 $arrCombinaciones = new CCombinacionSemana();
 for($i=0;$i<$generador->getMaxSemana();$i++){
-
     foreach ($horarios as $horario) {
         /** @var CHorario $horario */
         $kcalHorario = $get*$horario->getPorcentaje();
@@ -97,33 +102,51 @@ for($i=0;$i<$generador->getMaxSemana();$i++){
     }
 }
 
+/*
+ *  PERSISTIR LAS DIETAS
+ */
 
-$lCombinacion = new LCombinacion();
-$listaRecomendacionDia= $arrCombinaciones->listaCombinaciones;
+try{
+    $lDieta = new LDieta();
+    $listaRecomendacionDia= $arrCombinaciones->listaCombinaciones;
 
-$contDia = 0;
+    for($i = 0;  $i< LGenerarCombinacion::SEMANAS; $i++){
+        $contDia = 0;
+        for($j = 0; $j< LGenerarCombinacion::DIAS_SEMANA; $j++) {
+            $fechaAcumulada = CFecha::agregarDia($fechaHoy, $j + ($i* LGenerarCombinacion::DIAS_SEMANA ));
+            $esDomingo = CFecha::esDomingo($fechaAcumulada);
+            $cDieta = new CDieta();
+            $cDieta->setIdpersona($idpersona);
+            $cDieta->setFecha(CFecha::formatFechaBD( $fechaAcumulada));
+            $cDieta->setAsignado(intval(!$esDomingo));
+            $rptDieta = $lDieta->registrarDieta($cDieta);
+            if(!$esDomingo){
+                $iddieta = $rptDieta["iddieta"];
+                $recomendacionDia = $listaRecomendacionDia[$contDia];
+                foreach ($recomendacionDia as $combHorario) {
+                    /** @var CCombinacion $combHorario */
+                    $combHorario->setIddieta($iddieta);
+                    $registroCombinacion = $lDieta->registrarCombinacion($combHorario);
+                    if($registroCombinacion["success"]){
+                        $idcombinacion = $registroCombinacion["idcombinacion"];
+                        foreach ($combHorario->listaCombinacion as $combDetalle) {
+                            /**@var CCombinacionDetalle $combDetalle */
+                            $combDetalle->setIdcombinacion($idcombinacion);
+                            $lDieta->registrarCombinacionDetalle($combDetalle);
+                        }
+                    }
 
-for($i = 0;  $i< LGenerarCombinacion::SEMANAS; $i++){
-    $fecha = CFecha::agregarDia($fechaHoy, $contDia);
-    foreach ($listaRecomendacionDia as $indexDia => $recomendacionDia) {
-        foreach ($recomendacionDia as $combHorario) {
-            /** @var CCombinacion $combHorario */
-            $combHorario->setIdpersona($idpersona);
-            $combHorario->setFecha( CFecha::formatFechaBD($fecha));
-            $registroCombinacion = $lCombinacion->registrarCombinacion($combHorario);
-            if($registroCombinacion["success"]){
-                $idcombinacion = $registroCombinacion["idcombinacion"];
-                foreach ($combHorario->listaCombinacion as $combDetalle) {
-                    /**@var CCombinacionDetalle $combDetalle */
-                    $combDetalle->setIdcombinacion($idcombinacion);
-                    $lCombinacion->registrarCombinacionDetalle($combDetalle);
                 }
+                $contDia +=1;
             }
-
         }
-        $contDia+=1;
     }
+    $lPersona->cambiarRecalcular($idpersona, 0);
+    echo json_encode(CRespuestaWs::mostrar(true, "Plan alimenticio asignado", ["kcal"=>$get]));
+}catch (Exception $ex){
+    echo json_encode(CRespuestaWs::mostrar(true, "Error al asignar plan alimenticio"));
 }
+
 
 
 /*

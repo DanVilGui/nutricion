@@ -3,7 +3,6 @@ include_once '../Clases/imports.php';
 include_once '../Datos/imports.php';
 include_once '../Logica/imports.php';
 date_default_timezone_set('America/Lima');
-$diasSemana =[ "Domingo","Lunes", "Martes","Miércoles","Jueves","Viernes","Sábado"];
 Class WS
 {
 

@@ -1,8 +1,14 @@
 <?php
 
 
-class LCombinacion
+class LDieta
 {
+
+
+    function registrarDieta($dieta){
+        $dDieta = new DDieta();
+        return $dDieta->registrar($dieta);
+    }
     function registrarCombinacion($combinacion){
         $dCombinacion = new DCombinacion();
         return $dCombinacion->registrar($combinacion);

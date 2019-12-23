@@ -47,7 +47,7 @@ if(isset($respuesta["success"])) {
         $idpersona = $respuesta["idpersona"];
         $lPersona  = new LPersona();
         $res =  $lPersona->buscarPersonaDatos($idpersona);
-        echo json_encode( CRespuestaWs::mostrar(true, "Registrado correctamente", $res));
+        echo json_encode( CRespuestaWs::mostrar(true, "Bienvenido!", $res));
     }
 }
 

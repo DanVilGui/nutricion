@@ -3,6 +3,7 @@
 class CCombinacion
 {
 
+    public $iddieta;
     public $idhorario;
     public $idpersona;
     public $fecha;
@@ -128,6 +129,22 @@ class CCombinacion
     public function setIdhorario($idhorario)
     {
         $this->idhorario = $idhorario;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIddieta()
+    {
+        return $this->iddieta;
+    }
+
+    /**
+     * @param mixed $iddieta
+     */
+    public function setIddieta($iddieta)
+    {
+        $this->iddieta = $iddieta;
     }
 
 }

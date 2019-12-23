@@ -5,6 +5,7 @@ class LGenerarCombinacion
 {
     const SEMANAS = 2;
     const MAX_SEMANA = 6;
+    const DIAS_SEMANA =7;
     public $idhorario;
     public $listaProductos;
     public $tipos;

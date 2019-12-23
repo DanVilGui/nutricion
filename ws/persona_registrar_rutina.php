@@ -47,8 +47,10 @@ $clsPersonaRutina->setCorrer($correr);
 
 $lPersona = new LPersona();
 
+
 $res = $lPersona->registrarRutina($clsPersonaRutina);
 if($res){
+    $clsPersona = new CPersona();
     $rutina = $lPersona->buscarRutina($idpersona);
     echo json_encode(CRespuestaWs::mostrar(true, "Rutina registrada!", ["rutina"=> $rutina ]));
 }else{

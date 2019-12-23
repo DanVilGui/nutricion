@@ -12,3 +12,4 @@ include_once 'DPersonaRutina.php';
 include_once 'DPersonaPreferencia.php';
 include_once 'DCombinacionDetalle.php';
 include_once 'DCombinacion.php';
+include_once 'DDieta.php';

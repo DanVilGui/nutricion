@@ -4,12 +4,18 @@
 class LPersona
 {
 
+
     function buscarRutina($idpersona){
         $dPersonaRutina = new DPersonaRutina();
         $rutina = $dPersonaRutina->buscarRutina($idpersona);
         return $rutina;
     }
-
+    function cambiarRecalcular($idpersona, $recalcular)
+    {
+        $dPersonaRutina = new DPersonaRutina();
+        $rutina = $dPersonaRutina->cambiarRecalcular($idpersona, $recalcular);
+        return $rutina;
+    }
     function buscarPersonaDatos($idpersona){
         $dPersona = new DPersona();
         $dPersonaMedida = new DPersonaMedida();
@@ -49,4 +55,8 @@ class LPersona
         return $dPersonaMedida->buscarUltimaMedida($idpersona);
     }
 
+    function cambiarKcal($cPersona){
+        $dPersona = new DPersona();
+        return $dPersona->cambiarKcal($cPersona);
+    }
 }

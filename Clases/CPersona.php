@@ -11,7 +11,7 @@ class CPersona
     public $contrasenia;
     public $idlogin_tipo;
     public $fecha_nacimiento;
-
+    public $kcal;
     /**
      * @return mixed
      */
@@ -139,6 +139,23 @@ class CPersona
     {
         $this->fecha_nacimiento = $fecha_nacimiento;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getKcal()
+    {
+        return $this->kcal;
+    }
+
+    /**
+     * @param mixed $kcal
+     */
+    public function setKcal($kcal)
+    {
+        $this->kcal = $kcal;
+    }
+
 
 
 

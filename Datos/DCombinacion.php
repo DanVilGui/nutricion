@@ -6,12 +6,11 @@ class DCombinacion
     public function registrar($clsCombinacion){
         /** @var CCombinacion $clsCombinacion */
         $conexion = DConexion::Instance();
-        $sql = 'INSERT INTO tbl_combinacion(idpersona, kcaltotal, fecha, idhorario)  VALUES (?,?,?,?)';
+        $sql = 'INSERT INTO tbl_combinacion(iddieta, kcaltotal , idhorario)  VALUES (?,?,?)';
         try {
             $st =$conexion->prepare($sql);
             $conexion->beginTransaction();
-            $st->execute(array($clsCombinacion->idpersona, $clsCombinacion->kcalTotal, $clsCombinacion->fecha,
-                $clsCombinacion->idhorario));
+            $st->execute(array($clsCombinacion->iddieta, $clsCombinacion->kcalTotal, $clsCombinacion->idhorario));
             $idcombinacion = $conexion->lastInsertId();
             $conexion->commit();
             return [ 'success'=> true, 'message'=>'Registrado Correctamente', 'idcombinacion'=> $idcombinacion];

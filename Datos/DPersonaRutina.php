@@ -13,6 +13,13 @@ class DPersonaRutina
         return ($resultado !== false ) ? $resultado : null;
     }
 
+    function cambiarRecalcular($idpersona, $recalcular){
+        $conexion = DConexion::Instance();
+        $sql = "update tbl_persona_rutina set recalcular = ? where idpersona = ?";
+        $st =$conexion->prepare($sql);
+        $st->execute([$recalcular, $idpersona]);
+    }
+
     function registrarRutina($clsPersonaRutina){
         /** @var CPersonaRutina $clsPersonaRutina */
         $existeRutina = $this->buscarRutina($clsPersonaRutina->idpersona);
@@ -20,8 +27,8 @@ class DPersonaRutina
         if($existeRutina == null){
             $sql = 'insert into  tbl_persona_rutina(idpersona, caminar, escaleras, trabaja, trabaja_casa,
                     trabaja_ligero, trabaja_activo, trabaja_muyactivo, ciclismo, futbol, danza, baloncesto, 
-                    natacion, tenis, correr) 
-                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+                    natacion, tenis, correr, recalcular) 
+                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)';
             try {
                 $st =$conexion->prepare($sql);
                 $conexion->beginTransaction();
@@ -41,7 +48,7 @@ class DPersonaRutina
         }else{
             $sql = 'update  tbl_persona_rutina set caminar = ? , escaleras = ? , trabaja = ?, trabaja_casa = ?,
                     trabaja_ligero = ?, trabaja_activo = ?, trabaja_muyactivo = ?, ciclismo = ?, futbol = ?, danza = ?,
-                     baloncesto = ?, natacion = ?, tenis = ?, correr = ? where idpersona = ?';
+                     baloncesto = ?, natacion = ?, tenis = ?, correr = ?, recalcular = 1 where idpersona = ?';
             try {
                 $st =$conexion->prepare($sql);
                 $conexion->beginTransaction();
@@ -60,4 +67,6 @@ class DPersonaRutina
             }
         }
     }
+
+
 }

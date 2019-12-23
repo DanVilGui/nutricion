@@ -79,4 +79,12 @@ class DPersona
         return true;
     }
 
+    public function cambiarKcal($clsPersona){
+        /** @var CPersona $clsPersona */
+        $conexion = DConexion::Instance();
+        $sql = "update tbl_persona set kcal = ? where idpersona = ?";
+        $st =$conexion->prepare($sql);
+        $st->execute([$clsPersona->kcal, $clsPersona->idpersona ]);
+        return true;
+    }
 }
