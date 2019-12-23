@@ -4,7 +4,8 @@ class CCombinacion
 {
 
     public $idhorario;
-
+    public $idpersona;
+    public $fecha;
     /** @var CCombinacionDetalle array  */
     public $listaCombinacion = array();
     public $kcalTotal;
@@ -80,4 +81,53 @@ class CCombinacion
 
         return true;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdpersona()
+    {
+        return $this->idpersona;
+    }
+
+    /**
+     * @param mixed $idpersona
+     */
+    public function setIdpersona($idpersona)
+    {
+        $this->idpersona = $idpersona;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * @param mixed $fecha
+     */
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdhorario()
+    {
+        return $this->idhorario;
+    }
+
+    /**
+     * @param mixed $idhorario
+     */
+    public function setIdhorario($idhorario)
+    {
+        $this->idhorario = $idhorario;
+    }
+
 }

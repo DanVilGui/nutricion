@@ -3,12 +3,12 @@
 
 class LGenerarCombinacion
 {
-    public $maxSemana;
+    const SEMANAS = 2;
+    const MAX_SEMANA = 6;
     public $idhorario;
     public $listaProductos;
     public $tipos;
     const MAX_COMBINACIONES = 100000;
-    const MARGEN_KCAL = 50;
     /**
      * @return mixed
      */
@@ -62,7 +62,7 @@ class LGenerarCombinacion
      */
     public function getMaxSemana()
     {
-        return $this->maxSemana;
+        return self::MAX_SEMANA;
     }
 
     /**
@@ -133,9 +133,7 @@ class LGenerarCombinacion
     public function generarCombinacion(){
         $tipos = $this->tipos;
         $nCombinacion = new CCombinacion();
-        $kcalTotal = 0;
         $kcalAcumulada = 0;
-        $cantIntentos = 0;
         $arrIdsProducto = array();
         foreach ($tipos as $tipo) {
             /** @var CTipoProducto $tipo */
@@ -163,7 +161,6 @@ class LGenerarCombinacion
             }
         }
         $nCombinacion->kcalTotal = $kcalAcumulada;
-
         return $nCombinacion;
     }
 

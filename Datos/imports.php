@@ -10,3 +10,5 @@ include_once 'DPersona.php';
 include_once 'DPersonaMedida.php';
 include_once 'DPersonaRutina.php';
 include_once 'DPersonaPreferencia.php';
+include_once 'DCombinacionDetalle.php';
+include_once 'DCombinacion.php';

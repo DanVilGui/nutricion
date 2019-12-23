@@ -7,6 +7,7 @@ class CCombinacionDetalle
     const MEDIBLES_STEPS = [30,50,60,80,90,100,120,150,180,200];
     const UNIDADES_STEPS = [1,2];
 
+    public $idcombinacion;
     public $idproducto;
     public $producto;
     public $idtipo;
@@ -17,10 +18,12 @@ class CCombinacionDetalle
     public $medida;
     public $kcal;
     public $kcalTotal;
+    public $idrecomendacion;
 
     public function __construct($producto)
     {
         /** @var CProducto $producto */
+        $this->idrecomendacion = $producto->id;
         $this->idproducto = $producto->id;
         $this->producto = $producto->nombre;
         $this->idtipo = $producto->idtipo;
@@ -30,6 +33,24 @@ class CCombinacionDetalle
         $this->medida = $producto->medida;
         $this->kcal = $producto->kcal;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIdcombinacion()
+    {
+        return $this->idcombinacion;
+    }
+
+    /**
+     * @param mixed $idcombinacion
+     */
+    public function setIdcombinacion($idcombinacion)
+    {
+        $this->idcombinacion = $idcombinacion;
+    }
+
+
 
     /**
      * @return mixed

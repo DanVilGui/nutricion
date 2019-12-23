@@ -13,3 +13,4 @@ include_once 'CRespuestaWs.php';
 include_once 'CPersonaMedida.php';
 include_once 'CPersonaRutina.php';
 include_once 'CPersonaPreferencia.php';
+include_once 'CFecha.php';

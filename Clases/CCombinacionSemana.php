@@ -1,6 +1,6 @@
 <?php
 class CCombinacionSemana{
-    const MARGEN_KCAL = 40;
+    const MARGEN_KCAL = 30;
     const MAX_DIAS = 6;
     /** @var CCombinacion array  */
     public $listaCombinaciones = array();

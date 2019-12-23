@@ -10,7 +10,7 @@ $lPersona = new LPersona();
 /** @var CPersonaRutina $rutina */
 
 $persona = ( object)$lPersona->buscarPersona($idpersona);
-$fechaHoy = new DateTime("now");
+$fechaHoy = CFecha::hoy();
 $fechaNacimiento = new DateTime($persona->fecha_nacimiento);
 $interval = $fechaNacimiento->diff($fechaHoy);
 
@@ -46,26 +46,90 @@ switch (true) {
         break;
 }
 //muy leve
-$gaf += 0.013 * $peso * $rutina->trabaja_ligero * 60;
+$gaf += 0.013 * $peso * 60 * $rutina->trabaja_ligero;
+
 //leve
-$gaf += ($sexo == "M") ? 0.016 * $peso * $rutina->caminar : 0.015 * $peso * $rutina->caminar;
-$gaf += ($sexo == "M") ? 0.016 * $peso * $rutina->escaleras : 0.015 * $peso * $rutina->escaleras;
-$gaf += ($sexo == "M") ? 0.016 * $peso * $rutina->trabaja_casa : 0.015 * $peso * $rutina->trabaja_casa;
+$gaf += ($sexo == "M") ? 0.016 * $peso * 60 * $rutina->caminar : 0.015 * $peso * 60 * $rutina->caminar;
+$gaf += ($sexo == "M") ? 0.016 * $peso * 60 * $rutina->escaleras : 0.015 * $peso * 60 * $rutina->escaleras;
+$gaf += ($sexo == "M") ? 0.016 * $peso * 60 * $rutina->trabaja_casa : 0.015 * $peso * 60 * $rutina->trabaja_casa;
 //moderada
-$gaf += ($sexo == "M") ? 0.017 * $peso * $rutina->ciclismo : 0.016 * $peso * $rutina->ciclismo;
-$gaf += ($sexo == "M") ? 0.017 * $peso * $rutina->danza : 0.016 * $peso * $rutina->danza;
-$gaf += ($sexo == "M") ? 0.017 * $peso * $rutina->tenis : 0.016 * $peso * $rutina->tenis;
-$gaf += ($sexo == "M") ? 0.017 * $peso * $rutina->trabaja_activo : 0.016 * $peso * $rutina->trabaja_activo;
+$gaf += ($sexo == "M") ? 0.017 * $peso * 60 * $rutina->ciclismo : 0.016 * $peso * 60 * $rutina->ciclismo;
+$gaf += ($sexo == "M") ? 0.017 * $peso * 60 * $rutina->danza : 0.016 * $peso * 60 * $rutina->danza;
+$gaf += ($sexo == "M") ? 0.017 * $peso * 60 * $rutina->tenis : 0.016 * $peso * 60 * $rutina->tenis;
+$gaf += ($sexo == "M") ? 0.017 * $peso * 60 * $rutina->trabaja_activo : 0.016 * $peso * 60 * $rutina->trabaja_activo;
 
 //intensa
-$gaf += ($sexo == "M") ? 0.021 * $peso * $rutina->baloncesto : 0.019 * $peso * $rutina->baloncesto;
-$gaf += ($sexo == "M") ? 0.021 * $peso * $rutina->futbol : 0.019 * $peso * $rutina->futbol;
-$gaf += ($sexo == "M") ? 0.021 * $peso * $rutina->natacion : 0.019 * $peso * $rutina->natacion;
-$gaf += ($sexo == "M") ? 0.021 * $peso * $rutina->trabaja_muyactivo : 0.019 * $peso * $rutina->trabaja_muyactivo;
-$gaf += ($sexo == "M") ? 0.021 * $peso * $rutina->correr : 0.019 * $peso * $rutina->correr;
+$gaf += ($sexo == "M") ? 0.021 * $peso * 60 * $rutina->baloncesto : 0.019 * $peso * 60 * $rutina->baloncesto;
+$gaf += ($sexo == "M") ? 0.021 * $peso * 60 * $rutina->futbol : 0.019 * $peso * 60 * $rutina->futbol;
+$gaf += ($sexo == "M") ? 0.021 * $peso * 60 * $rutina->natacion : 0.019 * $peso * 60 * $rutina->natacion;
+$gaf += ($sexo == "M") ? 0.021 * $peso * 60 * $rutina->trabaja_muyactivo : 0.019 * $peso * 60 * $rutina->trabaja_muyactivo;
+$gaf += ($sexo == "M") ? 0.021 * $peso * 60 * $rutina->correr : 0.019 * $peso * 60 * $rutina->correr;
 
-echo "GER: " . $ger . " GAF: " . $gaf . "\n";
 $get = $gaf + $ger;
-echo "GET: " . $get . "\n";
 
-echo json_encode($rutina);
+$generador = new LGenerarCombinacion();
+$horarios=  $generador->listarHorarios();
+$maxCombinacionGeneradas = LGenerarCombinacion::MAX_COMBINACIONES;
+$arrCombinaciones = new CCombinacionSemana();
+for($i=0;$i<$generador->getMaxSemana();$i++){
+
+    foreach ($horarios as $horario) {
+        /** @var CHorario $horario */
+        $kcalHorario = $get*$horario->getPorcentaje();
+        $generador->filtrarXHorario($horario->getId());
+        $tipos = $generador->tipos;
+        $listaProductos = $generador->listaProductos;
+        $nroCombinacionGeneradas = 0;
+
+        while($nroCombinacionGeneradas< $maxCombinacionGeneradas){
+            $nCombinacion = $generador->generarCombinacion();
+            $nCombinacion->idhorario = $horario->id;
+            $nroCombinacionGeneradas +=1;
+            /*    * validar estructura combinacion    */
+            if ( $arrCombinaciones->validaCombinacionSemanal($kcalHorario,$i, $nCombinacion) ) {
+                /* ?>  MAX <?= $kcalHorario ?><br>  <?php $nCombinacion->imprimir();    */
+                $arrCombinaciones->agregarCombinacion($i,$nCombinacion);
+                ;break;
+
+            }
+        }
+
+    }
+}
+
+
+$lCombinacion = new LCombinacion();
+$listaRecomendacionDia= $arrCombinaciones->listaCombinaciones;
+
+$contDia = 0;
+
+for($i = 0;  $i< LGenerarCombinacion::SEMANAS; $i++){
+    $fecha = CFecha::agregarDia($fechaHoy, $contDia);
+    foreach ($listaRecomendacionDia as $indexDia => $recomendacionDia) {
+        foreach ($recomendacionDia as $combHorario) {
+            /** @var CCombinacion $combHorario */
+            $combHorario->setIdpersona($idpersona);
+            $combHorario->setFecha( CFecha::formatFechaBD($fecha));
+            $registroCombinacion = $lCombinacion->registrarCombinacion($combHorario);
+            if($registroCombinacion["success"]){
+                $idcombinacion = $registroCombinacion["idcombinacion"];
+                foreach ($combHorario->listaCombinacion as $combDetalle) {
+                    /**@var CCombinacionDetalle $combDetalle */
+                    $combDetalle->setIdcombinacion($idcombinacion);
+                    $lCombinacion->registrarCombinacionDetalle($combDetalle);
+                }
+            }
+
+        }
+        $contDia+=1;
+    }
+}
+
+
+/*
+echo "GER: " . $ger . " GAF: " . $gaf . "\n";
+echo "GET: " . $get . "\n";
+*/
+
+
+
