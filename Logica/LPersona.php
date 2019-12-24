@@ -54,7 +54,10 @@ class LPersona
         $dPersonaMedida = new DPersonaMedida();
         return $dPersonaMedida->buscarUltimaMedida($idpersona);
     }
-
+    function buscarMedidas($idpersona){
+        $dPersonaMedida = new DPersonaMedida();
+        return $dPersonaMedida->buscarMedidas($idpersona);
+    }
     function cambiarKcal($cPersona){
         $dPersona = new DPersona();
         return $dPersona->cambiarKcal($cPersona);

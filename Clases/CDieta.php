@@ -7,6 +7,7 @@ class CDieta
     public $fecha;
     public $idpersona;
     public $asignado;
+    public $fecharegistro;
 
     /**
      * @return mixed
@@ -70,6 +71,22 @@ class CDieta
     public function setAsignado($asignado)
     {
         $this->asignado = $asignado;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFechaRegistro()
+    {
+        return $this->fecharegistro;
+    }
+
+    /**
+     * @param mixed $fecharegistro
+     */
+    public function setFechaRegistro($fecharegistro)
+    {
+        $this->fecharegistro = $fecharegistro;
     }
 
 

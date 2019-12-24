@@ -119,6 +119,7 @@ try{
             $cDieta->setIdpersona($idpersona);
             $cDieta->setFecha(CFecha::formatFechaBD( $fechaAcumulada));
             $cDieta->setAsignado(intval(!$esDomingo));
+            $cDieta->setFechaRegistro(CFecha::formatFechaHoraBD($fechaHoy));
             $rptDieta = $lDieta->registrarDieta($cDieta);
             if(!$esDomingo){
                 $iddieta = $rptDieta["iddieta"];
@@ -141,7 +142,11 @@ try{
             }
         }
     }
+
+
     $lPersona->cambiarRecalcular($idpersona, 0);
+    $lDieta->borrarDietasAntiguas($idpersona, CFecha::formatFechaHoraBD($fechaHoy));
+
     echo json_encode(CRespuestaWs::mostrar(true, "Plan alimenticio asignado", ["kcal"=>$get]));
 }catch (Exception $ex){
     echo json_encode(CRespuestaWs::mostrar(true, "Error al asignar plan alimenticio"));

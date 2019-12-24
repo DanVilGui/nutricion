@@ -12,7 +12,14 @@ class DPersonaMedida
         $resultado = $st->fetch(PDO::FETCH_ASSOC);
         return ($resultado !== false ) ? $resultado : null;
     }
-
+    function buscarMedidas($idpersona){
+        $conexion = DConexion::Instance();
+        $sql = "select * from tbl_persona_medida where idpersona = ? order by idmedida asc";
+        $st =$conexion->prepare($sql);
+        $st->execute([$idpersona]);
+        $resultado = $st->fetchAll(PDO::FETCH_ASSOC);
+        return ($resultado !== false ) ? $resultado : null;
+    }
 
     public function agregarMedida($clsPersonaMedida){
         /** @var CPersonaMedida $clsPersonaMedida */

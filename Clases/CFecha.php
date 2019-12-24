@@ -16,6 +16,9 @@ class CFecha
         return $datetime->format('Y-m-d');
 
     }
+    static function formatFechaHoraBD($datetime){
+        return $datetime->format('Y-m-d H:i:s');
+    }
     static function obtenerDiaSemana($datetime){
         return $datetime->format('w');
     }
