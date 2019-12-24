@@ -23,7 +23,7 @@ class CCombinacionDetalle
     public function __construct($producto)
     {
         /** @var CProducto $producto */
-        $this->idrecomendacion = $producto->id;
+        $this->idrecomendacion = $producto->referenciaFact;
         $this->idproducto = $producto->id;
         $this->producto = $producto->nombre;
         $this->idtipo = $producto->idtipo;
@@ -31,6 +31,7 @@ class CCombinacionDetalle
         $this->idhorario = $producto->idhorario;
         $this->horario = $producto->horario;
         $this->medida = $producto->medida;
+        $this->cant = $producto->cantidad;
         $this->kcal = $producto->kcal;
     }
 

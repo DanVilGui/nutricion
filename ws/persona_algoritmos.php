@@ -4,7 +4,7 @@ include_once 'validaciones.php';
 $data = WS::validarToken();
 $idpersona = $data["idpersona"];
 
-//$idpersona = 1;
+//$idpersona = 9;
 $lPersona = new LPersona();
 /** @var CPersona $persona */
 /** @var CPersonaMedida $medida */
@@ -146,7 +146,7 @@ try{
 
     $lPersona->cambiarRecalcular($idpersona, 0);
     $lDieta->borrarDietasAntiguas($idpersona, CFecha::formatFechaHoraBD($fechaHoy));
-
+   // echo json_encode($arrCombinaciones);
     echo json_encode(CRespuestaWs::mostrar(true, "Plan alimenticio asignado", ["kcal"=>$get]));
 }catch (Exception $ex){
     echo json_encode(CRespuestaWs::mostrar(true, "Error al asignar plan alimenticio"));

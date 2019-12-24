@@ -23,4 +23,21 @@ class DDieta{
         $sql = "delete  FROM tbl_dieta WHERE idpersona = ? and fecharegistro < ? AND date(fecha) >= DATE( ? );";
         $conexion->prepare($sql)->execute([$idpersona, $fecha, $fecha]);
     }
+
+    public function buscarDietaPersonaFecha($idpersona,$fecha){
+        $conexion = DConexion::Instance();
+        $sql = "select
+                       dp.nombre as producto, tc.idhorario, dh.nombre as horario,tcd.kcal,
+                       tcd.cantidad, dp.medida, fecha  from tbl_dieta td
+                inner join tbl_combinacion tc on td.iddieta = tc.iddieta
+                inner join tbl_combinacion_detalle tcd on tc.idcombinacion = tcd.idcombinacion
+                inner join fact_recomendacion fr on tcd.idrecomendacion = fr.id
+                inner join dim_producto dp on fr.idproducto = dp.id
+                inner join dim_horario dh on tc.idhorario = dh.id
+                where td.idpersona = ? and date(td.fecha) = ?;";
+        $st =$conexion->prepare($sql);
+        $st->execute([$idpersona, $fecha]);
+        $resultado = $st->fetchAll(PDO::FETCH_ASSOC);
+        return $resultado;
+    }
 }

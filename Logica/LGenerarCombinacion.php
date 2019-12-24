@@ -102,6 +102,7 @@ class LGenerarCombinacion
             $producto->medida = $pro["medida"];
             $listaProductos[] = $producto;
         }
+
         $this->listaProductos = $listaProductos;
         $this->tipos = $tipos;
 
