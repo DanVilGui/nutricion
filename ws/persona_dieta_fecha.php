@@ -3,10 +3,16 @@ include_once 'validaciones.php';
 $data = WS::validarToken();
 $idpersona = $data["idpersona"];
 $idpersona = 9;
-$fecha = CFecha::hoy();
+$fecha = WS::JSONPOST("fecha");
 $lDieta = new LDieta();
-$dieta = $lDieta->buscarDietaPersonaFecha($idpersona, CFecha::formatFechaBD($fecha));
+$dietaInfo = $lDieta->buscarDietaPersonaInfo($idpersona, $fecha);
+$dieta = $lDieta->buscarDietaPersonaFecha($idpersona, $fecha);
 $horarios = $lDieta->buscarHorarios();
 
-echo json_encode( CRespuestaWs::mostrar(true, "", ["dieta"=>$dieta, "horarios"=>$horarios]));
+if($dietaInfo === false){
+    echo json_encode( CRespuestaWs::mostrar(false, "No hay una asignada para esta fecha"));
+
+}else{
+    echo json_encode( CRespuestaWs::mostrar(true, "", ["info"=> $dietaInfo, "dieta"=>$dieta, "horarios"=>$horarios]));
+}
 

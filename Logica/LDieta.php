@@ -34,7 +34,12 @@ class LDieta
         $dDieta = new DDieta();
         return $dDieta->buscarDietaPersonaFecha($idpersona, $fecha);
     }
-    public function buscarHorarios(){
+    public function buscarDietaPersonaInfo($idpersona,$fecha){
+        $dDieta = new DDieta();
+        return $dDieta->buscarDietaPersonaInfo($idpersona, $fecha);
+    }
+
+        public function buscarHorarios(){
         $dHorario = new DHorario();
         return $dHorario->listarHorarios();
     }
