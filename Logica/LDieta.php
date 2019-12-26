@@ -38,8 +38,17 @@ class LDieta
         $dDieta = new DDieta();
         return $dDieta->buscarDietaPersonaInfo($idpersona, $fecha);
     }
+    public function buscarEstadisticaDietas($idpersona,$fecha){
+        $dDieta = new DDieta();
+        return $dDieta->buscarEstadisticaDietas($idpersona, $fecha);
+    }
 
-        public function buscarHorarios(){
+    public function terminarDia($idpersona,$fecha){
+        $dDieta = new DDieta();
+        return $dDieta->terminarDia($idpersona, $fecha);
+    }
+
+    public function buscarHorarios(){
         $dHorario = new DHorario();
         return $dHorario->listarHorarios();
     }

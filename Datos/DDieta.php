@@ -4,7 +4,7 @@ class DDieta{
     public function registrar($cDieta){
         /** @var CDieta $cDieta */
         $conexion = DConexion::Instance();
-        $sql = 'INSERT INTO tbl_dieta( idpersona,fecha, asignado, fecharegistro)  VALUES (?,?,?, ?)';
+        $sql = 'INSERT INTO tbl_dieta( idpersona,fecha, asignado, terminado, fecharegistro)  VALUES (?,?,?,0, ?)';
         try {
             $st =$conexion->prepare($sql);
             $conexion->beginTransaction();
@@ -31,6 +31,24 @@ class DDieta{
         $st->execute([$idpersona, $fecha]);
         $resultado = $st->fetch(PDO::FETCH_ASSOC);
         return $resultado;
+    }
+    public function buscarEstadisticaDietas($idpersona,$fecha){
+        $conexion = DConexion::Instance();
+        $sql = "SELECT COUNT(*) AS total,
+                 SUM(CASE  WHEN terminado = 1 THEN 1 ELSE 0 END) AS terminado  FROM tbl_dieta 
+                WHERE  idpersona  = ? and  DATE(fecha) <= ? ";
+        $st =$conexion->prepare($sql);
+        $st->execute([$idpersona, $fecha]);
+        $resultado = $st->fetch(PDO::FETCH_ASSOC);
+        return $resultado;
+    }
+    public function terminarDia($idpersona,$fecha){
+        $conexion = DConexion::Instance();
+        $sql = "update tbl_dieta set terminado = 1
+                WHERE  idpersona  = ? and  DATE(fecha) = ? ";
+        $st =$conexion->prepare($sql);
+        $st->execute([$idpersona, $fecha]);
+        return $st->rowCount();
     }
 
     public function buscarDietaPersonaFecha($idpersona,$fecha){

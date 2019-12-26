@@ -8,7 +8,7 @@ class CDieta
     public $idpersona;
     public $asignado;
     public $fecharegistro;
-
+    public $terminado;
     /**
      * @return mixed
      */
@@ -87,6 +87,22 @@ class CDieta
     public function setFechaRegistro($fecharegistro)
     {
         $this->fecharegistro = $fecharegistro;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTerminado()
+    {
+        return $this->terminado;
+    }
+
+    /**
+     * @param mixed $terminado
+     */
+    public function setTerminado($terminado)
+    {
+        $this->terminado = $terminado;
     }
 
 
