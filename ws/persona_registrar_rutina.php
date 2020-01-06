@@ -13,7 +13,7 @@ $trabaja_ligero = intval ( WS::JSONPOST("trabaja_ligero",false));
 $trabaja_casa =  intval( WS::JSONPOST("trabaja_casa",false));
 $trabaja_activo = intval( WS::JSONPOST("trabaja_activo",false));
 $trabaja_muyactivo = intval( WS::JSONPOST("trabaja_muyactivo",false));
-$trabaja = WS::JSONPOST("trabaja",false)!=null ?  WS::JSONPOST("trabaja",false) : 1;
+$trabaja = WS::JSONPOST("trabaja",false)!=null ? 0 : 1;
 
 /*
  * deportes

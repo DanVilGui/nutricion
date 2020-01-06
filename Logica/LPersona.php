@@ -28,6 +28,7 @@ class LPersona
         $persona["medidas"] = $medidas;
         $persona["rutina"] = $rutina;
         $persona["preferencia"] = $preferencia;
+        $persona["ultimadieta"] =  $dPersona->buscarUltimaDieta($idpersona);
         return ["datos"=> $persona];
     }
 

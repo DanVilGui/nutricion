@@ -12,6 +12,15 @@ class DPersona
         return $resultado;
     }
 
+    function buscarUltimaDieta($idpersona){
+        $conexion = DConexion::Instance();
+        $sql = "SELECT fecha FROM tbl_dieta WHERE idpersona = ? ORDER BY fecha DESC LIMIT 1;";
+        $st =$conexion->prepare($sql);
+        $st->execute([$idpersona]);
+        $resultado = $st->fetch(PDO::FETCH_ASSOC);
+        if($resultado === false) return null;
+        return $resultado["fecha"];
+    }
 
     function buscarMedidasControles($idpersona){
         $conexion = DConexion::Instance();
