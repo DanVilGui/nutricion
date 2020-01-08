@@ -31,6 +31,10 @@ class LPersona
         $persona["ultimadieta"] =  $dPersona->buscarUltimaDieta($idpersona);
         return ["datos"=> $persona];
     }
+    function accederCuenta($clsPersona){
+        $dPersona = new DPersona();
+        return $dPersona->accederCuenta($clsPersona);
+    }
 
     function registrarRutina($clsPersonaRutina){
         $dPersonaRutina = new DPersonaRutina();

@@ -42,6 +42,15 @@ class DPersona
         return $resultado;
     }
 
+    function accederCuenta($clsPersona){
+        /** @var CPersona $clsPersona */
+        $conexion = DConexion::Instance();
+        $sql = "SELECT idpersona FROM tbl_persona WHERE correo = ?  AND contrasenia = SHA2(?,256);";
+        $st =$conexion->prepare($sql);
+        $st->execute([$clsPersona->correo, $clsPersona->contrasenia]);
+        $resultado = $st->fetch(PDO::FETCH_ASSOC);
+         return ( $resultado === false) ? null : $resultado;
+    }
 
     function registrarPesona($clsPersona){
         /** @var CPersona $clsPersona */

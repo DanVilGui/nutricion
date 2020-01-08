@@ -1,15 +1,16 @@
 <?php
 include_once 'validaciones.php';
+
 $nombres = WS::JSONPOST("nombres");
 $apellidos = WS::JSONPOST("apellidos");
 $correo = WS::JSONPOST("correo");
 $idlogin_tipo = WS::JSONPOST('idlogin_tipo');
+
 if($idlogin_tipo == 1){
     $contrasenia = WS::JSONPOST("contrasenia");
 }else{
     $contrasenia = WS::JSONPOST("contrasenia",false);
 }
-
 $clsPersona = new CPersona();
 $clsPersona->setNombres( $nombres);
 $clsPersona->setApellidos($apellidos);
