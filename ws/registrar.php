@@ -39,10 +39,10 @@ if(isset($respuesta["success"])) {
     $login_tipo = $respuesta["login_tipo"];
     if($login_tipo =="NATIVO" or $rptidlogin_tipo != $clsPersona->getIdloginTipo()){
         $message = "";
-        switch ($login_tipo){
-            case "FACEBOOK": $message = "Este ya se encuentra registrado con FACEBOOK";break;
-            case "GOOGLE": $message = "Este ya se encuentra registrado con GOOGLE";break;
-            case "NATIVO": $message = "Este ya se encuentra registrado, ingrese con su correo y contraseña.";break;
+        switch ($rptidlogin_tipo){
+            case 2: $message = "Este ya se encuentra registrado con FACEBOOK";break;
+            case 3: $message = "Este ya se encuentra registrado con GOOGLE";break;
+            case 1: $message = "Este ya se encuentra registrado, ingrese con su correo y contraseña.";break;
         }
         echo json_encode(CRespuestaWs::mostrar(false, $message));
     }else{
