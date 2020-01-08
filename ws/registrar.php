@@ -39,6 +39,7 @@ if(isset($respuesta["success"])) {
     $login_tipo = $respuesta["login_tipo"];
     if($login_tipo =="NATIVO" or $rptidlogin_tipo != $clsPersona->getIdloginTipo()){
         $message = "";
+        echo $login_tipo;
         switch ($login_tipo){
             case "FACEBOOK": $message = "Este ya se encuentra registrado con FACEBOOK";break;
             case "GOOGLE": $message = "Este ya se encuentra registrado con GOOGLE";break;
