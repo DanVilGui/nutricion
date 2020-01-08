@@ -15,6 +15,6 @@ if($respuesta !=null){
     echo json_encode( CRespuestaWs::mostrar(true, "Bienvenido!", $res));
 
 }else{
-    echo json_encode(CRespuestaWs::mostrar(false, "Correo o Contraseña incorrectas!"));
+    echo json_encode(CRespuestaWs::mostrar(false, "Correo o contraseña incorrecta!"));
 
 }
