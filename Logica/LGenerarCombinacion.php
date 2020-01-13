@@ -151,6 +151,7 @@ class LGenerarCombinacion
                     $productoAleatorio = $filtro[rand(0, sizeof($filtro) - 1)];
                     $combinacionDetalle = new CCombinacionDetalle($productoAleatorio);
                     $idproducto = $combinacionDetalle->getIdproducto();
+                    
                     $existeProducto = intval (array_search($idproducto, $arrIdsProducto));
                     if ($existeProducto == 0) {
                         $combinacionDetalle->generarMedida();

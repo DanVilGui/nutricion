@@ -10,6 +10,7 @@ if($idlogin_tipo == 1){
     $contrasenia = WS::JSONPOST("contrasenia");
 }else{
     $contrasenia = WS::JSONPOST("contrasenia",false);
+    $contrasenia = "%/@D3sC1Fr4m3@#%";
 }
 $clsPersona = new CPersona();
 $clsPersona->setNombres( $nombres);

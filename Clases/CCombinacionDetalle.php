@@ -171,6 +171,8 @@ class CCombinacionDetalle
         return self::MEDIBLES_STEPS[array_rand(self::MEDIBLES_STEPS)];
     }
 
+
+
     function generarMedida( ){
         $kcal = $this->kcal;
         if ($this->medida == "unidad") {
@@ -182,6 +184,14 @@ class CCombinacionDetalle
         }
         $this->cant = round($cantidad, 2);
         $this->kcalTotal = round($kcalTotal, 2);
+
+        if($this->idtipo == 4 && $cantidad <120){
+            $this->generarMedida();
+        }
+        if($this->idtipo == 9 && $cantidad <80){
+            $this->generarMedida();
+        }
+
     }
 
     function esProducto($nombre){
