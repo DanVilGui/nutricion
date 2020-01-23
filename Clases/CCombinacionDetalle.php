@@ -4,7 +4,8 @@
 class CCombinacionDetalle
 {
 
-    const MEDIBLES_STEPS = [30,50,60,80,90,100,120,150,180,200];
+    const MEDIBLES_STEPS = [30,50,60,80,90,100,120,150,180,200,250,300,320,350,400];
+    const MEDIBLES_CARNES = [200, 250, 300, 350, 400,420,450,480,500,520,550,600];
     const UNIDADES_STEPS = [1,2];
 
     public $idcombinacion;
@@ -171,15 +172,23 @@ class CCombinacionDetalle
         return self::MEDIBLES_STEPS[array_rand(self::MEDIBLES_STEPS)];
     }
 
-
+    function medidaAleatoriaCarnes(){
+        return self::MEDIBLES_CARNES[array_rand(self::MEDIBLES_CARNES)];
+    }
 
     function generarMedida( ){
         $kcal = $this->kcal;
+        $idtipo = $this->idtipo;
+        $tipo_carne = 4;
         if ($this->medida == "unidad") {
             $cantidad = $this->unidadAleatoria();
             $kcalTotal = $cantidad * $kcal;
         } else {
-            $cantidad = $this->medidaAleatoria();
+            if($this->idtipo == 4){
+                $cantidad = $this->medidaAleatoriaCarnes();
+            }else{
+                $cantidad = $this->medidaAleatoria();
+            }
             $kcalTotal = $cantidad * $kcal / 100;
         }
         $this->cant = round($cantidad, 2);

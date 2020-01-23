@@ -1,6 +1,11 @@
 <?php
 class CCombinacionSemana{
     const MARGEN_KCAL = 30;
+    const MARGEN_KCAL_MAX1 = 200;
+    const MARGEN_KCAL_MAX2 = 400;
+    const MARGEN_KCAL_MAX3 = 500;
+    const MARGEN_KCAL_MAX4 = 600;
+
     const MAX_DIAS = 6;
     /** @var CCombinacion array  */
     public $listaCombinaciones = array();
@@ -8,7 +13,12 @@ class CCombinacionSemana{
     public function validaCombinacionSemanal($maxKcal, $dia, $combinacion){
         /** @var CCombinacion $combinacion */
         $diff = $maxKcal - $combinacion->kcalTotal;
-        if($diff<0 or $diff> self::MARGEN_KCAL) return false;
+        $margen = self::MARGEN_KCAL;
+        if($maxKcal>2800) $margen = self::MARGEN_KCAL_MAX4;
+        else if($maxKcal>2500) $margen = self::MARGEN_KCAL_MAX3;
+        else if($maxKcal>2000) $margen = self::MARGEN_KCAL_MAX2;
+        else if($maxKcal>1000) $margen = self::MARGEN_KCAL_MAX1;
+        if($diff<0 or $diff> $margen) return false;
         if(!$combinacion->esValida()) return false;
         /*
          * creamos uan copia del objeto combinacion a validar a la semana
