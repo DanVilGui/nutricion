@@ -4,6 +4,7 @@
     <include_path>
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/box/spout" />
+      <path value="$PROJECT_DIR$/vendor/verot/class.upload.php" />
     </include_path>
   </component>
 </project>

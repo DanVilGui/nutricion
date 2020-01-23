@@ -3,7 +3,6 @@ include_once '../Clases/imports.php';
 include_once '../Datos/imports.php';
 include_once '../Logica/imports.php';
 date_default_timezone_set('America/Lima');
-$ruta_imagenes = $_SERVER['DOCUMENT_ROOT']."/nutricion/ws/images/";
 
 Class WS
 {

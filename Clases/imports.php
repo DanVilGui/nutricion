@@ -15,3 +15,4 @@ include_once 'CPersonaRutina.php';
 include_once 'CPersonaPreferencia.php';
 include_once 'CFecha.php';
 include_once 'CDieta.php';
+include_once 'CPost.php';

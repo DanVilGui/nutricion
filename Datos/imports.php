@@ -13,3 +13,4 @@ include_once 'DPersonaPreferencia.php';
 include_once 'DCombinacionDetalle.php';
 include_once 'DCombinacion.php';
 include_once 'DDieta.php';
+include_once 'DPost.php';
