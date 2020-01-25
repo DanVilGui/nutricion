@@ -10,7 +10,9 @@ class CHorario
 
 
     const DESAYUNOID = 1;
+    const COLACION1 = 2;
     const ALMUERZOID = 3;
+    const COLACION2 = 4;
     const CENAID = 5;
 
     /**

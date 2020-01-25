@@ -16,6 +16,10 @@ class CCombinacion
         $this->listaCombinacion[] = $comb;
     }
 
+    public  function  mostrarJson(){
+        echo json_encode($this->listaCombinacion);
+    }
+
     public function imprimir(){
         echo "<table>
                         <thead>

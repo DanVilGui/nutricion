@@ -20,7 +20,7 @@ $generador = new LGenerarCombinacion();
 $generador->setMaxSemana(6);
 $horarios=  $generador->listarHorarios();
 $maxCombinacionGeneradas = LGenerarCombinacion::MAX_COMBINACIONES;
-$imc = 8000;
+$imc = 6000;
 $margenKcal = 35;
 $arrCombinaciones = new CCombinacionSemana();
 
@@ -84,3 +84,4 @@ for($i=0;$i<$generador->getMaxSemana();$i++){
 }
 
 ?>
+

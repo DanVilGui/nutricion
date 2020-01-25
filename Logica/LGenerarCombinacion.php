@@ -9,7 +9,7 @@ class LGenerarCombinacion
     public $idhorario;
     public $listaProductos;
     public $tipos;
-    const MAX_COMBINACIONES = 100000;
+    const MAX_COMBINACIONES = 600000;
     /**
      * @return mixed
      */

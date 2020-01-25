@@ -1,10 +1,11 @@
 <?php
 class CCombinacionSemana{
     const MARGEN_KCAL = 30;
-    const MARGEN_KCAL_MAX1 = 200;
-    const MARGEN_KCAL_MAX2 = 400;
-    const MARGEN_KCAL_MAX3 = 500;
-    const MARGEN_KCAL_MAX4 = 600;
+    const MARGEN_KCAL_MAX0 = 400;
+    const MARGEN_KCAL_MAX1 = 550;
+    const MARGEN_KCAL_MAX2 = 650;
+    const MARGEN_KCAL_MAX3 = 750;
+    const MARGEN_KCAL_MAX4 = 850;
 
     const MAX_DIAS = 6;
     /** @var CCombinacion array  */
@@ -12,14 +13,24 @@ class CCombinacionSemana{
 
     public function validaCombinacionSemanal($maxKcal, $dia, $combinacion){
         /** @var CCombinacion $combinacion */
-        $diff = $maxKcal - $combinacion->kcalTotal;
-        $margen = self::MARGEN_KCAL;
-        if($maxKcal>2800) $margen = self::MARGEN_KCAL_MAX4;
-        else if($maxKcal>2500) $margen = self::MARGEN_KCAL_MAX3;
-        else if($maxKcal>2000) $margen = self::MARGEN_KCAL_MAX2;
-        else if($maxKcal>1000) $margen = self::MARGEN_KCAL_MAX1;
+
+        if( ($combinacion->idhorario == CHorario::COLACION1 or $combinacion->idhorario == CHorario::COLACION2)
+           and  $maxKcal > 620 ){
+            $diff =   1000  - $combinacion->kcalTotal;
+            $margen = 400;
+        }
+        else if($maxKcal> 1300){
+            $diff =   1500  - $combinacion->kcalTotal;
+            $margen = 550;
+        }else{
+            $diff = $maxKcal - $combinacion->kcalTotal;
+            $margen = self::MARGEN_KCAL;
+        }
+
         if($diff<0 or $diff> $margen) return false;
         if(!$combinacion->esValida()) return false;
+        echo $diff."-".$margen."<br>";
+
         /*
          * creamos uan copia del objeto combinacion a validar a la semana
          */
@@ -114,6 +125,7 @@ class CCombinacionSemana{
             $cafeDesayuno = false;
             if(isset( $combinacionDia[CHorario::DESAYUNOID])){
                 $combinacionDesayuno = $combinacionDia[CHorario::ALMUERZOID];
+
                 if(isset($combinacionDesayuno->listaCombinacion)) {
                     foreach ($combinacionDesayuno->listaCombinacion as $combinacionDetalleDesayuno) {
                         /** @var CCombinacionDetalle $combinacionDetalleDesayuno */
