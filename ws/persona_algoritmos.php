@@ -85,7 +85,6 @@ for($i=0;$i<$generador->getMaxSemana();$i++){
         $tipos = $generador->tipos;
         $listaProductos = $generador->listaProductos;
         $nroCombinacionGeneradas = 0;
-
         while($nroCombinacionGeneradas< $maxCombinacionGeneradas){
             $nCombinacion = $generador->generarCombinacion();
             $nCombinacion->idhorario = $horario->id;
@@ -102,6 +101,8 @@ for($i=0;$i<$generador->getMaxSemana();$i++){
     }
 }
 
+
+die();
 /*
  *  PERSISTIR LAS DIETAS
  */
