@@ -29,7 +29,6 @@ class CCombinacionSemana{
 
         if($diff<0 or $diff> $margen) return false;
         if(!$combinacion->esValida()) return false;
-        echo $diff."-".$margen."<br>";
 
         /*
          * creamos uan copia del objeto combinacion a validar a la semana
