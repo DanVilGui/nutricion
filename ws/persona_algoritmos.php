@@ -101,8 +101,6 @@ for($i=0;$i<$generador->getMaxSemana();$i++){
     }
 }
 
-
-die();
 /*
  *  PERSISTIR LAS DIETAS
  */
