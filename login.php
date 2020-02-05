@@ -1,7 +1,7 @@
 <?php
 session_start();
 $validarUsuario = false;
-$title = "Chelito's Eventos";
+$title = "Nutrilife";
 if(isset($_POST['password'])){
     $password = $_POST['password'];
     $_SESSION['acceso_login'] = $password;

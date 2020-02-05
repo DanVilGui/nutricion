@@ -41,7 +41,28 @@ class DPersona
         $resultado = $st->fetch(PDO::FETCH_ASSOC);
         return $resultado;
     }
-
+    function validarEnvioRecuperacion($correo){
+        $conexion = DConexion::Instance();
+        $sql = "select codigorecuperacion, fecharecuperacion  from tbl_persona p
+                where idlogin_tipo =1 and correo = ?";
+        $st =$conexion->prepare($sql);
+        $st->execute([$correo]);
+        $resultado = $st->fetch(PDO::FETCH_ASSOC);
+        return $resultado;
+    }
+    function cambiarCodigoRecuperacion($codigo,$fecha, $correo){
+        $conexion = DConexion::Instance();
+        $sql = "update  tbl_persona set codigorecuperacion = ?, fecharecuperacion = ? where idlogin_tipo =1 and correo = ?";
+        $st =$conexion->prepare($sql);
+        $st->execute([$codigo, $fecha, $correo]);
+    }
+    function cambiarPassRecuperar($codigo, $contrasenia, $correo){
+        $conexion = DConexion::Instance();
+        $sql = "update  tbl_persona set contrasenia = sha2(?,256) , codigorecuperacion = null, fecharecuperacion = null 
+        where idlogin_tipo =1 and codigorecuperacion = ? and correo = ?";
+        $st =$conexion->prepare($sql);
+        $st->execute([$contrasenia, $codigo, $correo]);
+    }
     function accederCuenta($clsPersona){
         /** @var CPersona $clsPersona */
         $conexion = DConexion::Instance();

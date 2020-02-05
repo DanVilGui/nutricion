@@ -4,7 +4,7 @@
 class CFecha
 {
     const DIAS_SEMANA  = [ "Domingo","Lunes", "Martes","Miércoles","Jueves","Viernes","Sábado"];
-
+    const FORMATO_DATETIME = 'Y-m-d H:i:s';
     static function hoy(){
         return new DateTime("now");
     }
@@ -19,6 +19,9 @@ class CFecha
     static function formatFechaHoraBD($datetime){
         return $datetime->format('Y-m-d H:i:s');
     }
+
+
+
     static function obtenerDiaSemana($datetime){
         return $datetime->format('w');
     }

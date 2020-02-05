@@ -38,7 +38,7 @@ if(isset($respuesta["success"])) {
     //ya existe
     $rptidlogin_tipo = $respuesta["idlogin_tipo"];
     $login_tipo = $respuesta["login_tipo"];
-    if($login_tipo =="NATIVO" or $rptidlogin_tipo != $clsPersona->getIdloginTipo()){
+    if( $rptidlogin_tipo!= $idlogin_tipo and  $idlogin_tipo ==  1){
         $message = "";
         switch ($rptidlogin_tipo){
             case 2: $message = "Este ya se encuentra registrado con FACEBOOK";break;
