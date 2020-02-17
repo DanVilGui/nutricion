@@ -28,6 +28,16 @@ class ComposerStaticInite1076c0c180d99e459d82ae64a8bae18
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'R' => 
+        array (
+            'Requests' => 
+            array (
+                0 => __DIR__ . '/..' . '/rmccue/requests/library',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Verot\\Upload\\Upload' => __DIR__ . '/..' . '/verot/class.upload.php/src/class.upload.php',
     );
@@ -37,6 +47,7 @@ class ComposerStaticInite1076c0c180d99e459d82ae64a8bae18
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInite1076c0c180d99e459d82ae64a8bae18::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInite1076c0c180d99e459d82ae64a8bae18::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInite1076c0c180d99e459d82ae64a8bae18::$prefixesPsr0;
             $loader->classMap = ComposerStaticInite1076c0c180d99e459d82ae64a8bae18::$classMap;
 
         }, null, ClassLoader::class);

@@ -5,6 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/box/spout" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpmailer/phpmailer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/rmccue/requests" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/verot/class.upload.php" />
     </content>
     <orderEntry type="inheritedJdk" />

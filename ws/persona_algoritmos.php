@@ -24,27 +24,43 @@ $sexo = $persona->sexo;
 $peso = $medida->peso;
 $ger = $gaf = 0;
 
+
 //echo $edad . "-" . $sexo . "-" . $peso . "\n";
-switch (true) {
-    case $edad > 0 && $edad <= 3:
-        $ger = ($sexo == "M") ? 60.9 * $peso - 54 : 61 * $peso - 51;
-        break;
-    case $edad > 3 && $edad <= 10:
-        $ger = ($sexo == "M") ? 22.7 * $peso + 495 : 22.5 * $peso + 499;
-        break;
-    case $edad > 10 && $edad <= 18:
-        $ger = ($sexo == "M") ? 17.5 * $peso + 651 : 12.2 * $peso + 746;
-        break;
-    case $edad > 18 && $edad <= 30:
-        $ger = ($sexo == "M") ? 15.3 * $peso + 679 : 14.7 * $peso + 496;
-        break;
-    case $edad > 30 && $edad <= 60:
-        $ger = ($sexo == "M") ? 11.6 * $peso + 879 : 14.7 * $peso + 746;
-        break;
-    case $edad > 60:
-        $ger = ($sexo == "M") ? 13.5 * $peso + 487 : 10.5 * $peso + 596;
-        break;
+
+
+try{
+    $url = 'http://13.58.250.57:5000/api/nutrition/ger';
+    $vsexo = ($sexo == "M") ?  rand(0,10) :  rand(5,15);
+    $headers = array('Content-Type' => 'application/json');
+    $data = array('edad' => $edad, 'sexo'=> $vsexo , 'peso'=>$peso);
+    $response = Requests::post($url, $headers, json_encode($data));
+    $ger = json_decode($response->body)->ger;
+
+}catch (Exception $ex){
+    switch (true) {
+        case $edad > 0 && $edad <= 3:
+            $ger = ($sexo == "M") ? 60.9 * $peso - 54 : 61 * $peso - 51;
+            break;
+        case $edad > 3 && $edad <= 10:
+            $ger = ($sexo == "M") ? 22.7 * $peso + 495 : 22.5 * $peso + 499;
+            break;
+        case $edad > 10 && $edad <= 18:
+            $ger = ($sexo == "M") ? 17.5 * $peso + 651 : 12.2 * $peso + 746;
+            break;
+        case $edad > 18 && $edad <= 30:
+            $ger = ($sexo == "M") ? 15.3 * $peso + 679 : 14.7 * $peso + 496;
+            break;
+        case $edad > 30 && $edad <= 60:
+            $ger = ($sexo == "M") ? 11.6 * $peso + 879 : 14.7 * $peso + 746;
+            break;
+        case $edad > 60:
+            $ger = ($sexo == "M") ? 13.5 * $peso + 487 : 10.5 * $peso + 596;
+            break;
+    }
 }
+
+
+
 //muy leve
 $gaf += 0.013 * $peso * 60 * $rutina->trabaja_ligero;
 
