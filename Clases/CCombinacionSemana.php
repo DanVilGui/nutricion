@@ -1,6 +1,6 @@
 <?php
 class CCombinacionSemana{
-    const MARGEN_KCAL = 30;
+    const MARGEN_KCAL = 50;
     const MARGEN_KCAL_MAX0 = 400;
     const MARGEN_KCAL_MAX1 = 550;
     const MARGEN_KCAL_MAX2 = 650;
@@ -21,7 +21,7 @@ class CCombinacionSemana{
         }
         else if($maxKcal> 1300){
             $diff =   1500  - $combinacion->kcalTotal;
-            $margen = 550;
+            $margen = 610;
         }else{
             $diff = $maxKcal - $combinacion->kcalTotal;
             $margen = self::MARGEN_KCAL;

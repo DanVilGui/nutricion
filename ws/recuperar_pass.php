@@ -10,7 +10,7 @@ $contrasenia = WS::JSONPOST("pass",false);
 
 
 $correo = 'adidas29019@gmail.com';
-$pass = 'aplicacionmovil2020';
+$pass = 'aplicacion2020';
 $randomNumber = rand(100000,999999);
 $tit = "Nutrilife: Recuperación de contraseña $randomNumber";
 $msg = "Su código de recuperación es :  <b> $randomNumber </b>";
@@ -78,6 +78,7 @@ $mail->Body = $msg;
 
 
 if (!$mail->send()) {
+    echo $mail->ErrorInfo;
     echo json_encode( CRespuestaWs::mostrar(false, "Error al enviar el código de recuperación"));
 
 } else {

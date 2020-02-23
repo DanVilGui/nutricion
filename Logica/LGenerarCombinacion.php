@@ -10,6 +10,7 @@ class LGenerarCombinacion
     public $listaProductos;
     public $tipos;
     const MAX_COMBINACIONES = 600000;
+
     /**
      * @return mixed
      */
@@ -131,6 +132,17 @@ class LGenerarCombinacion
         }
         return $arr;
     }
+    
+    
+    public function  buscarProductoArreglo($arreglo, $id){
+        foreach ($arreglo as $item){
+            if($item == $id) return true;
+        }
+        return false;
+    }
+
+
+
 
     public function generarCombinacion(){
         $tipos = $this->tipos;
@@ -151,9 +163,9 @@ class LGenerarCombinacion
                     $productoAleatorio = $filtro[rand(0, sizeof($filtro) - 1)];
                     $combinacionDetalle = new CCombinacionDetalle($productoAleatorio);
                     $idproducto = $combinacionDetalle->getIdproducto();
-                    
-                    $existeProducto = intval (array_search($idproducto, $arrIdsProducto));
-                    if ($existeProducto == 0) {
+
+                    $existeProducto = $this->buscarProductoArreglo($arrIdsProducto, $idproducto);
+                    if (!$existeProducto) {
                         $combinacionDetalle->generarMedida();
                         $kcalAcumulada += $combinacionDetalle->kcalTotal;
                         $nCombinacion->agregarCombinacion($combinacionDetalle);
