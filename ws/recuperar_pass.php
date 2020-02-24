@@ -78,7 +78,6 @@ $mail->Body = $msg;
 
 
 if (!$mail->send()) {
-    echo $mail->ErrorInfo;
     echo json_encode( CRespuestaWs::mostrar(false, "Error al enviar el código de recuperación"));
 
 } else {
