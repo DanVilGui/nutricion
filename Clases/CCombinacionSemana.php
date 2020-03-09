@@ -13,7 +13,7 @@ class CCombinacionSemana{
 
     public function validaCombinacionSemanal($maxKcal, $dia, $combinacion){
         /** @var CCombinacion $combinacion */
-
+        /* cuando el kcal sobrepasa los 5000kcal*/
         if( ($combinacion->idhorario == CHorario::COLACION1 or $combinacion->idhorario == CHorario::COLACION2)
            and  $maxKcal > 620 ){
             $diff =   1000  - $combinacion->kcalTotal;
