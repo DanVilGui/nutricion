@@ -1,0 +1,8 @@
+<VirtualHost *:80>
+    ServerAdmin admin@nutrilifeepici.xyz
+    ServerName nutrilifeepici.xyz
+    ServerAlias www.nutrilifeepici.xyz
+    DocumentRoot /var/www/nutricion/public_html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

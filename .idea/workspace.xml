@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95ee2345-de67-4967-bd2a-e9d57ed26394" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Datos/DConexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/Datos/DConexion.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nutrlifeepici.xyz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -135,7 +136,7 @@
       <workItem from="1583253240438" duration="61000" />
       <workItem from="1583293011702" duration="11000" />
       <workItem from="1583764151363" duration="4863000" />
-      <workItem from="1586964454620" duration="1797000" />
+      <workItem from="1586964454620" duration="2560000" />
     </task>
     <servers />
   </component>
