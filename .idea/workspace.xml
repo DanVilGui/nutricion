@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95ee2345-de67-4967-bd2a-e9d57ed26394" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/nutrlifeepici.xyz" beforeDir="false" afterPath="$PROJECT_DIR$/nutrlifeepici.xyz" afterDir="false" />
-    </list>
+    <list default="true" id="95ee2345-de67-4967-bd2a-e9d57ed26394" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +133,7 @@
       <workItem from="1583253240438" duration="61000" />
       <workItem from="1583293011702" duration="11000" />
       <workItem from="1583764151363" duration="4863000" />
-      <workItem from="1586964454620" duration="2855000" />
+      <workItem from="1586964454620" duration="3101000" />
     </task>
     <servers />
   </component>
