@@ -4,10 +4,10 @@
 class DConexion
 {
     public static  $PDO;
-    private static $server = "db";
+    private static $server = "127.0.0.1";
     private static $port= "3306";
     private static $bd = "nutricion";
-    private static $user = "nutrilife";
+    private static $user = "root";
     private static $pass = "123456";
 
 
