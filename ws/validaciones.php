@@ -24,6 +24,7 @@ Class WS
 
     static function JSONPOST($campo, $validar = true)
     {
+
         $data = json_decode(file_get_contents('php://input'), true);
         if (isset($data[$campo]) or !$validar)
             return isset($data[$campo]) ? $data[$campo] : null;
